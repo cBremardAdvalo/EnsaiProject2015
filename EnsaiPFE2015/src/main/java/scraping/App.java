@@ -19,13 +19,17 @@ public class App
     public static void main( String[] args )
     {
     	LOGGER.debug("START");
+    	String page = "http://www.ubaldi.com/puericulture/sommeil/decoration-chambre/babycalin/fauteuil-enfant-babycalin--fauteuil-club-mango--660330.php";
         try {
-			Document doc = Jsoup.connect("http://www.aubert.com/Lits-60-x-120-cm-transformables-Lit-Sleepi-120-cm-Noyer-Stokke.html").get();
-			String data = "For product page \"/www.aubert.com/Lits-60-x-120-cm-transformables-Lit-Sleepi-120-cm-Noyer-Stokke.html\", we have meta data :";
-			for(Element meta : doc.select("meta")) {
+			Document doc = Jsoup.connect(page).get();
+			String data = "For product page \""+page+"\", we have meta data :";
+			for(Element meta : doc.select("div#dv_ean")) {
 				if(meta.hasAttr("itemprop")){
-					data += "\r\n\t\""+meta.attr("itemprop")+"\" = "+meta.attr("content");
+					data += "\r\n\t\""+meta.attr("id")+"\" = "+meta.attr("title");
 				}
+//				if(meta.hasAttr("itemprop")){
+//					data += "\r\n\t\""+meta.attr("itemprop")+"\" = "+meta.attr("content");
+//				}
 			}
 			LOGGER.info(data);
 		} catch (IOException e) {

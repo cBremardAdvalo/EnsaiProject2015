@@ -23,7 +23,7 @@ public class CassandraConnection {
 	    String keyspace = "abb";
 	    CassandraConnection connection = new CassandraConnection(serverIp, keyspace);
 	    try {
-			connection.loadRefProduct();
+			//connection.loadRefProduct();
 			connection.loadVisitorProduct();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -116,7 +116,7 @@ public class CassandraConnection {
 		int counter = 0;
 		BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\cbremard\\Downloads\\part-r-00000"));
 		@SuppressWarnings("resource")
-		CsvListReader csvReader = new CsvListReader(reader, new CsvPreference.Builder('"', ';', "\n").build());
+		CsvListReader csvReader  = new CsvListReader(reader, new CsvPreference.Builder('"', '|', "\r\n").build());
 		List<String> line;
 		
 		line = csvReader.read();
